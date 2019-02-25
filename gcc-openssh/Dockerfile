@@ -2,7 +2,7 @@ FROM gcc:8.2.0
 LABEL maintainer="Peter Gyima peter.gyima@gimadigital.com>"
 
 # lets upgrade and add net-tools
-RUN apt-get update && apt-get upgrade -y && apt-get install -y net-tools
+RUN apt-get update && apt-get upgrade -y && apt-get install -y net-tools && apt-get install -y less
 
 # add ssh - taken from https://docs.docker.com/engine/examples/running_ssh_service/
 RUN apt-get install -y openssh-server
