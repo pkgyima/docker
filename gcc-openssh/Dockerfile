@@ -1,8 +1,11 @@
 FROM gcc:8.2.0
 LABEL maintainer="Peter Gyima peter.gyima@gimadigital.com>"
 
+# lets upgrade and add net-tools
+RUN apt-get update && apt-get upgrade -y && apt-get install -y net-tools
+
 # add ssh - taken from https://docs.docker.com/engine/examples/running_ssh_service/
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN echo 'root:screencast' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
