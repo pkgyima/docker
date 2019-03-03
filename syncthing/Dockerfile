@@ -4,6 +4,7 @@ LABEL maintainer="Peter Gyima peter.gyima@gimadigital.com>"
 ENV RUN_USER                                syncthing
 ENV RUN_GROUP                               syncthing
 ENV INSTALL_DIR                             /opt/syncthing
+ENV CONF_DIR                                /var/lib/syncthing
 ENV GUI_PORT                                8384
 ENV GUI_IP                                  0.0.0.0
 
@@ -15,7 +16,9 @@ EXPOSE ${GUI_PORT}
 EXPOSE 22000
 
 # create a amed volume to persist data
-VOLUME [":${INSTALL_DIR}"]
+RUN mkdir ${CONF_DIR}
+RUN chown ${RUN_USER}:${RUN_GROUP} ${CONF_DIR}
+VOLUME ${CONF_DIR}
 
 # create install dir
 RUN mkdir -p ${INSTALL_DIR}
@@ -39,4 +42,4 @@ WORKDIR ${INSTALL_DIR}/syncthing-linux-amd64-v1.0.1
 USER ${RUN_USER}
 
 # start the application
-CMD ./syncthing -gui-address="http://${GUI_IP}:${GUI_PORT}"
+CMD ./syncthing -home=${CONF_DIR} -gui-address="http://${GUI_IP}:${GUI_PORT}"
