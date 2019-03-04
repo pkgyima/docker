@@ -5,7 +5,10 @@ LABEL maintainer="Peter Gyima <peter.gyima@gimadigital.com>"
 RUN apt-get update && apt-get upgrade -y 
 
 # install less and add net-tools
-RUN apt-get install -y net-tools && apt-get install -y less
+RUN apt-get install -y net-tools 
+RUN apt-get install -y less
+RUN apt-get install -y vim
+RUN apt-get install -y cmake
 
 # add ssh - taken from https://docs.docker.com/engine/examples/running_ssh_service/
 RUN apt-get install -y openssh-server
