@@ -4,11 +4,12 @@ LABEL maintainer="Peter Gyima <peter.gyima@gimadigital.com>"
 # lets upgrade 
 RUN apt-get update && apt-get upgrade -y 
 
-# install less and add net-tools
+# install less, net-tools, vim, gdb, cmake
 RUN apt-get install -y net-tools 
 RUN apt-get install -y less
 RUN apt-get install -y vim
 RUN apt-get install -y cmake
+RUN apt-get install -y gdb
 
 # add ssh - taken from https://docs.docker.com/engine/examples/running_ssh_service/
 RUN apt-get install -y openssh-server
