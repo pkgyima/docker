@@ -1,12 +1,8 @@
 FROM alpine:3.9
 LABEL maintainer="Peter Gyima peter.gyima@gimadigital.com>"
 
-# set environment variables
-#ENV RUN_USER                                rsync
-#ENV RUN_GROUP                               rsync
-
-# set user and user group
-#RUN addgroup -S ${RUN_GROUP} && adduser -S ${RUN_USER} -G ${RUN_GROUP}
+# set frequency of rsync
+ENV FREQ                                5
 
 # lets upgrade 
 RUN apk update 
@@ -15,8 +11,9 @@ RUN apk update
 RUN apk add rsync
 RUN apk add less
 
-# lets run as user
-#USER ${RUN_USER}
+#copy the entrypoint file
+COPY entrypoint.sh /bin/
 
-# start the application
-CMD ["rsync", "--daemon", "--no-detach", "-4"]
+RUN chmod +x /bin/entrypoint.sh 
+
+ENTRYPOINT ["/bin/entrypoint.sh"]
