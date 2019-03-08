@@ -21,7 +21,7 @@ do
          rsync $line
       done < "$1"
       # sleep set in env variable FREQ
-      sleep 5
+      sleep $FREQ
    fi
 done
 

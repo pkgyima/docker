@@ -2,7 +2,7 @@ FROM alpine:3.9
 LABEL maintainer="Peter Gyima peter.gyima@gimadigital.com>"
 
 # set frequency of rsync
-ENV FREQ                                5
+ENV FREQ  5 
 
 # lets upgrade 
 RUN apk update 
