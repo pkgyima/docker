@@ -10,7 +10,8 @@ RUN apt-get install -y less
 RUN apt-get install -y vim
 RUN apt-get install -y cmake
 RUN apt-get install -y gdb
-RUN apt-get install -y libboost-dev-all
+RUN apt-get install -y boost-dev-all
+RUN apt-get install -y cifs-utils
 
 # add ssh - taken from https://docs.docker.com/engine/examples/running_ssh_service/
 RUN apt-get install -y openssh-server
