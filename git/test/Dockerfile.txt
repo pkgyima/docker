@@ -1,0 +1,20 @@
+FROM alpine/git
+LABEL maintainer="Peter Gyima <peter.gyima@gimadigital.com>"
+
+# lets upgrade 
+RUN apk -y update 
+
+# install less, net-tools, vim, gdb, cmake
+RUN apk -y install net-tools 
+RUN apk -y install less
+RUN apk -y install vim
+RUN apk -y install cifs-utils
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+EXPOSE 1948
+EXPOSE 80
+EXPOSE 443
+EXPOSE 9418
+CMD ["/usr/sbin/sshd", "-D"]

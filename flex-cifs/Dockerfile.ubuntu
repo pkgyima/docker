@@ -1,0 +1,24 @@
+FROM ubuntu
+LABEL maintainer="Peter Gyima <peter.gyima@gimadigital.com>"
+
+#location of kubelet plugins
+ENV KUBELET_VOLUME_PLUGIN /usr/libexec/kubernetes/kubelet-plugins/volume/exec
+
+# lets upgrade 
+RUN apt -y update 
+RUN apt -y full-upgrade 
+
+# install jq, util-linux, cifs-utils, coreutils
+RUN apt -y install jq 
+RUN apt -y install util-linux
+RUN apt -y install coreutils
+RUN apt -y install cifs-utils
+
+# download the cifs into the volume directory
+RUN mkdir -p $KUBELET_VOLUME_PLUGIN/
+ADD https://raw.githubusercontent.com/fstab/cifs/master/cifs $KUBELET_VOLUME_PLUGIN/
+RUN chmod 755 $KUBELET_VOLUME_PLUGIN/cifs
+
+VOLUME $KUBELET_VOLUME_PLUGIN/
+
+CMD ["sh", "-c", "sleep 9999999999"]
