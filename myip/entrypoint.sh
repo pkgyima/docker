@@ -56,10 +56,25 @@ else
    list_sep=$LIST_SEP
 fi
 echo "list separator set to '$list_sep'"
+# set default user agent if not set
+if [ -z "$USER_AGENT" ]; then 
+  USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+fi 
+echo "User Agent $USER_AGENT" 
+# only add body data if set 
+if [ -z "$BODY_DATA" ]; then 
+   body_data=""
+else 
+   body_data="-d $BODY_DATA"
+fi 
+# set default update method
+if [ -z "$UPDATE_METHOD" ]
+   UPDATE_METHOD="GET"
+fi 
 ## run the update commands every FREQ seconds
 while [ 1 ]
 do
-   resp=$(curl -X $UPDATE_METHOD -H "User-Agent: $USER_AGENT" -d "$ENC_DATA" $SITE_URL)
+   resp=$(curl -X $UPDATE_METHOD -H "User-Agent: $USER_AGENT" $body_data $SITE_URL)
    echo "$resp"
    # check that hostnames, usernames and passwords are all set and are not empty
    if [[ "$HOST_NAMES" ]] && [[ "$GOOGLE_USERNAMES" ]] && [[ "$GOOGLE_PASSWORDS" ]]; then
