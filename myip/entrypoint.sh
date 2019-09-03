@@ -68,7 +68,7 @@ else
    body_data="-d $BODY_DATA"
 fi 
 # set default update method
-if [ -z "$UPDATE_METHOD" ]
+if [ -z "$UPDATE_METHOD" ]; then
    UPDATE_METHOD="GET"
 fi 
 ## run the update commands every FREQ seconds
