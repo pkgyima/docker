@@ -1,17 +1,12 @@
-FROM gcc:8.2.0
+FROM gcc:latest
 LABEL maintainer="Peter Gyima <peter.gyima@gimadigital.com>"
 
 # lets upgrade 
 RUN apt-get update && apt-get upgrade -y 
 
 # install less, net-tools, vim, gdb, cmake
-RUN apt-get install -y net-tools 
-RUN apt-get install -y less
-RUN apt-get install -y vim
-RUN apt-get install -y cmake
-RUN apt-get install -y gdb
-RUN apt-get install -y python-dev
-RUN apt-get install -y libgtest-dev
+RUN apt-get install -y net-tools less vim cmake gdb
+RUN apt-get install -y python-dev libgtest-dev libboost-dev
 RUN apt-get install -y cifs-utils
 
 # add ssh - taken from https://docs.docker.com/engine/examples/running_ssh_service/
